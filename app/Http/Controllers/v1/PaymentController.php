@@ -28,7 +28,7 @@ class PaymentController extends Controller
             if ($index === array_key_last($response['data'])) {
                 $data = (object) [
                     'kd_objek_pajak' => $r['kd_objek_pajak'],
-                    'no_registrasi' => $r['no_registrasi'],
+                    'npwpd' => $r['npwpd'],
                     'nm_wp' => $r['nm_wp'],
                     'objek_pajak' => $r['objek_pajak'],
                     'alamat' => $r['alamat'],

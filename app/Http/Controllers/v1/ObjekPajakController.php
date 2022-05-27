@@ -13,7 +13,7 @@ class ObjekPajakController extends Controller
 {
     public function index()
     {
-        $op = ObjekPajak::with('geolocation')->latest()->get();
+        $op = ObjekPajak::with('geolocation', 'objekimage')->latest()->get();
 
         return ObjekPajakResource::collection($op);
     }
@@ -60,6 +60,7 @@ class ObjekPajakController extends Controller
                 'panjang' => $request->panjang,
                 'lebar' => $request->lebar,
                 'tinggi' => $request->tinggi,
+                'keterangan' => $request->ket
             ]);
 
             return response()->json([

@@ -16,12 +16,12 @@ class PaymentResource extends JsonResource
     {
         return [
             'kd_op' => $this->kd_objek_pajak,
-            'no_reg' => rtrim($this->no_registrasi),
+            'npwpd' => rtrim($this->npwpd),
             'nm_wp' => $this->nm_wp,
             'objek_pajak' => $this->objek_pajak,
             'lokasi_reklame' => $this->alamat,
-            'jns_reklame' => $this->jns_reklame,
-            'kecamatan' => $this->kecamatan,
+            'jns_reklame' => strtolower($this->jns_reklame),
+            'kecamatan' => strtolower($this->kecamatan),
             'panjang' => (int) $this->panjang,
             'lebar' => (int) $this->lebar,
             'tinggi' => (int) $this->tinggi,

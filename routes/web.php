@@ -16,6 +16,11 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::put('/{id}', 'UserController@update');
         Route::delete('/{id}', 'UserController@destroy');
     });
-});
 
-Route::post('/paylist', 'PaymentController');
+    Route::group(['prefix' => 'objek-pajak'], function () {
+        Route::get('/', 'ObjekPajakController@index');
+        Route::post('/create', 'ObjekPajakController@store');
+    });
+
+    Route::post('/paylist', 'PaymentController');
+});

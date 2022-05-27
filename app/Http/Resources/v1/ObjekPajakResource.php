@@ -26,10 +26,12 @@ class ObjekPajakResource extends JsonResource
             'panjang' => $this->panjang,
             'lebar' => $this->lebar,
             'tinggi' => $this->tinggi,
+            'keterangan' => $this->keterangan,
             'coordinate' => [
                 'long' => $this->geolocation->longitude,
                 'lat' => $this->geolocation->latitude,
             ],
+            'images' => $this->objekimage
         ];
     }
 }

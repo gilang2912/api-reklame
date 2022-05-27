@@ -18,7 +18,8 @@ class ObjekPajak extends Model
         'kecamatan',
         'panjang',
         'lebar',
-        'tinggi'
+        'tinggi',
+        'keterangan',
     ];
 
     public function geolocation()
