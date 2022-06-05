@@ -13,7 +13,17 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::latest()->get();
+        $q = request()->get('q');
+
+        $users = User::latest()->paginate(5);
+
+        if ($q) {
+            $users = User::where('username', 'LIKE', '%' . $q . '%')
+                ->orWhere('nama', 'LIKE', '%' . $q . '%')
+                ->orWhere('nip', 'LIKE', '%' . $q . '%')
+                ->latest()
+                ->paginate(5);
+        }
 
         return UserResource::collection($users);
     }

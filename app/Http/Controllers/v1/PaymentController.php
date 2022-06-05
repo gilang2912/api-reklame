@@ -16,11 +16,18 @@ class PaymentController extends Controller
                 'kd_objek_pajak' => $request->kd_op
             ])
             ->json();
+
         $response2 = Http::withBasicAuth('user_gis', 'user-gis</>')
             ->get(env('SIMPAKDU_API_URL') . 'objek-pajak', [
                 'kd_objek_pajak' => $request->kd_op
             ])
             ->json();
+
+        if (in_array('404', $response)) {
+            return response()->json([
+                'message' => 'Data tidak ditemukan',
+            ], 404);
+        }
 
         $data = [];
         sort($response['data']);

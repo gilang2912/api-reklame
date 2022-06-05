@@ -31,7 +31,7 @@ class ObjekPajakResource extends JsonResource
                 'long' => $this->geolocation->longitude,
                 'lat' => $this->geolocation->latitude,
             ],
-            'images' => $this->objekimage
+            'images' => ObjekImagesResource::collection($this->objekimage)
         ];
     }
 }

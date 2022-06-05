@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -22,6 +23,10 @@ class AuthController extends Controller
                 'message' => 'Masukkan username dan password yang valid.'
             ], 422);
         }
+
+        $user = User::where('username', '=', $request->username)->first();
+        $user->last_login = date('Y-m-d H:i:s');
+        $user->save();
 
         return $this->responseWithToken($token);
     }
@@ -43,7 +48,7 @@ class AuthController extends Controller
         return response()->json([
             'token' => $token,
             'type' => 'Bearer',
-            'data' => auth()->user(),
+            'user' => auth()->user(),
             'expired_in' => auth()->factory()->getTTL()
         ]);
     }

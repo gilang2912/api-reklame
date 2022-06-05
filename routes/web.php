@@ -9,6 +9,8 @@ $router->get('/', function () use ($router) {
 Route::post('/login', 'AuthController@login');
 
 Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/dashboard', 'DashboardController@index');
+
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', 'UserController@index');
         Route::post('/create', 'UserController@store');
@@ -20,7 +22,15 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::group(['prefix' => 'objek-pajak'], function () {
         Route::get('/', 'ObjekPajakController@index');
         Route::post('/create', 'ObjekPajakController@store');
+        Route::post('/detail', 'ObjekPajakController@show');
+        Route::put('/update', 'ObjekPajakController@update');
+        Route::post('/delete', 'ObjekPajakController@destroy');
+        Route::get('/withpayment', 'ObjekPajakController@showWithPayment');
     });
 
+    Route::get('/me', 'AuthController@me');
+
     Route::post('/paylist', 'PaymentController');
+
+    Route::post('/logout', 'AuthController@logout');
 });
