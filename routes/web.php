@@ -17,6 +17,13 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/{id}', 'UserController@show');
         Route::put('/{id}', 'UserController@update');
         Route::delete('/{id}', 'UserController@destroy');
+        Route::post('/change-pass', 'UserController@changePassword');
+    });
+
+    Route::group(['prefix' => 'roles'], function () {
+        Route::get('/', 'UserController@role');
+        Route::post('/create', '<UserControl></UserControl>ler@storeRole');
+        Route::post('/grant', 'UserController@grantRole');
     });
 
     Route::group(['prefix' => 'objek-pajak'], function () {

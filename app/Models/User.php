@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\v1\GrantRoleUser;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -14,13 +15,18 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable, HasFactory;
 
-    protected $fillable = [ 
+    protected $fillable = [
         'nama', 'username', 'password', 'nip', 'last_login'
     ];
 
     protected $hidden = [
         'password',
     ];
+
+    public function grantRole()
+    {
+        return $this->hasOne(GrantRoleUser::class, 'user_id', 'id');
+    }
 
     public function getJWTIdentifier()
     {
