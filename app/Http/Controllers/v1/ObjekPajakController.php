@@ -140,10 +140,14 @@ class ObjekPajakController extends Controller
             }
         }
 
+        $geo = Geolocation::where('kd_objek_pajak', '=', $kd_op)->first();
+
+        $geo->longitude = $request->long;
+        $geo->latitude = $request->lat;
+        $geo->save();
+
         $op->objek_pajak = $request->objek_pajak;
         $op->lokasi_objek = $request->lokasi_objek;
-        $op->geolocation->longitude = $request->long;
-        $op->geolocation->latitude = $request->lat;
         $op->keterangan = $request->ket;
         $op->save();
 
